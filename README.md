@@ -50,12 +50,14 @@ http://localhost:5000/metrics
 ---
 
 ## 🚀 Getting Started
-### 1 fork your own copy
+### 1. fork your own copy
 ### 2. Clone the repository
 ```bash
 git clone https://github.com/your-username/Exam2025_Version1.git
+```
 ```bash
 cd Exam2025_version1
 ```bash
 docker-compose up --build
 ### 3. enjoy
+```
