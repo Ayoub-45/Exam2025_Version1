@@ -22,9 +22,10 @@ A simple Flask-based web application to simulate product sales and monitor metri
 - Docker + Docker Compose
 
 ---
+
 ## 📦 Prerequisites
 
-Make sure you have installed:
+Ensure you have the following installed:
 
 - [Docker](https://www.docker.com/)
 - [Docker Compose](https://docs.docker.com/compose/)
@@ -32,32 +33,37 @@ Make sure you have installed:
 ---
 
 ## 📁 Project Structure
+
 ├── app.py # Flask application
 ├── Dockerfile # Dockerfile for Flask app
 ├── requirements.txt # Python dependencies
-├── prometheus/prometheus.yaml # Prometheus config file
-├── docker-compose.yml # Multi-container config
+├── prometheus/
+│ └── prometheus.yaml # Prometheus config file
+├── docker-compose.yaml # Multi-container setup
 ├── templates/ # HTML templates
 └── README.md
+
+---
+
 ## 🧪 Metrics Exposed
 
 - `views_by_product{product="Apple"}` – Number of views per product
 - `sales_duration_seconds` – Histogram measuring time spent processing sales
 
-Metrics are available at:  
-http://localhost:5000/metrics
+📍 Metrics endpoint:  
+[http://localhost:5000/metrics](http://localhost:5000/metrics)
 
 ---
+---
+## 📊 Accessing the Interfaces
+Flask App: http://localhost:5000
 
-## 🚀 Getting Started
-### 1. fork your own copy
-### 2. Clone the repository
-```bash
-git clone https://github.com/your-username/Exam2025_Version1.git
-```
-```bash
-cd Exam2025_version1
-```bash
-docker-compose up --build
-### 3. enjoy
-```
+Prometheus UI: http://localhost:9090
+
+Grafana Dashboard: http://localhost:3000
+
+🔐 Default Grafana credentials:
+
+Username: admin
+
+Password: admin
