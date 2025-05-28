@@ -1,7 +1,12 @@
-from flask import Flask, render_template, request, redirect, url_for
+import random
+import time
+from flask import Flask, jsonify, render_template, request, redirect, url_for
+from prometheus_client.metrics import Counter
+from prometheus_client import Histogram, generate_latest,Summary
 
 app = Flask(__name__)
-
+views_product = Counter('views_by_product', 'Number of views by product', ['product'])
+sales_duration= Histogram('sales_duration_seconds', 'Time spent processing sales')
 # Updated product structure with code, description, and price
 products = {
     1: {'description': 'Apple', 'price': 0.5},
@@ -36,10 +41,20 @@ def calculate():
 @app.route('/sales')
 def sales():
     return render_template('sales.html', sales=sales_history)
+@app.route('/sales', methods=['POST'])
+@sales_duration.time()
+def sales_time():
+    data = request.json
+    product = data.get("product", "unknown")
+    # Simulate some processing time
+    time.sleep(random.uniform(0.1, 0.5))
+    return jsonify({"message": f"Sale completed for {product}"}), 200
 
 @app.route('/back')
 def back():
     return redirect(url_for('index'))
-
+@app.route("/metrics")
+def metric():
+    return generate_latest(), 200, {'Content-Type': 'text/plain; version=0.0.4; charset=utf-8'}
 if __name__ == '__main__':
     app.run(debug=True)
